@@ -64,9 +64,15 @@ function App() {
     translatedText,
     loading
   }, dispatch] = useReducer(reducer, initialState)
+
+  console.log('sourceLanguage', sourceLanguage)
   return (
     <div className='App'>
       <h1>Google Tanslate by Tibecvp</h1>
+      <button onClick={() => {
+        dispatch({ type: 'SET_SOURCE_LANGUAGE', payload: 'en' })
+      }}>Set source language to English</button>
+      {sourceLanguage}
     </div>
   )
 }
