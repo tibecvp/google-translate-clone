@@ -39,11 +39,6 @@ function App() {
           {targetLanguage}
         </Col>
       </Row>
-
-      <button onClick={() => {
-        setSourceLanguage('en')
-      }}>Set source language to English</button>
-      {sourceLanguage}
     </Container>
   )
 }
