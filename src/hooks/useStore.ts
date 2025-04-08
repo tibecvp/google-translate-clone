@@ -13,6 +13,7 @@ const initialState: State = {
     const { type } = action
   
     if (type === 'INTERCHANGE_LANGUAGES') {
+      if (state.sourceLanguage === 'auto') return state
       return {
         ...state,
         sourceLanguage: state.targetLanguage,

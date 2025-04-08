@@ -5,8 +5,8 @@ export type AutoLanguage = typeof AUTO_LANGUAGE
 export type SourceLanguage = Language | AutoLanguage
 
 export interface State {
-    sourceLanguage: string
-    targetLanguage: string
+    sourceLanguage: SourceLanguage
+    targetLanguage: Language
     sourceText: string
     translatedText: string
     loading: boolean
@@ -14,7 +14,7 @@ export interface State {
 
 export type Action = 
     | { type: 'INTERCHANGE_LANGUAGES' }
-    | { type: 'SET_SOURCE_LANGUAGE', payload: string }
-    | { type: 'SET_TARGET_LANGUAGE', payload: string }
+    | { type: 'SET_SOURCE_LANGUAGE', payload: SourceLanguage }
+    | { type: 'SET_TARGET_LANGUAGE', payload: Language }
     | { type: 'SET_SOURCE_TEXT', payload: string }
     | { type: 'SET_TRANSLATED_TEXT', payload: string }
