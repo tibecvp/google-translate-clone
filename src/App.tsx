@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { Container, Row, Col, Button, Form, Stack } from 'react-bootstrap'
+import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
 
 import './App.css'
 import { ArrowsIcon } from './components/icons'

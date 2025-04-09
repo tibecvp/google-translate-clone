@@ -8,7 +8,7 @@ interface Props {
     value: string
 }
 
-const commonStyles = { border: '2px #f5f5f5 solid', height: '200px', resize: 'none' }
+const commonStyles = { border: '2px #f5f5f5 solid', height: '200px' }
 
 const getPlaceholder = ({ type, loading }: { type: SectionType, loading?: boolean }) => {
     if (type === SectionType.Source) return 'Enter text'
@@ -30,7 +30,7 @@ export const TextArea = ({ type, loading, value, onChange }: Props) => {
             autoFocus={type === SectionType.Source}
             as='textarea'
             placeholder={getPlaceholder({ type, loading })}
-            style={styles}
+            style={{ ...styles, resize: 'none' }}
             value={value}
             onChange={handleChange}
         />
