@@ -1,42 +1,68 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form, Stack } from 'react-bootstrap'
 
 import './App.css'
 import { ArrowsIcon } from './components/icons'
 import { LanguageSelector } from './components/LanguageSelector'
 import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE } from './constants'
+import { SectionType } from './types.d'
+import { TextArea } from './components/TextArea'
 
 function App() {
-  const { sourceLanguage, targetLanguage, interchangeLanguages, setSourceLanguage, setTargetLanguage } = useStore()
+  const {
+    loading,
+    sourceLanguage,
+    sourceText,
+    targetLanguage,
+    translatedText,
+    interchangeLanguages,
+    setSourceLanguage,
+    setTargetLanguage,
+    setSourceText,
+    setTranslatedText
+  } = useStore()
   return (
     <Container fluid>
-      <h1>Google Tanslate by Tibecvp</h1>
+      <h2>Google Tanslate by Tibecvp</h2>
 
       <Row>
         <Col>
-          <LanguageSelector
-            type='source'
-            value={sourceLanguage}
-            onChange={setSourceLanguage}
-          />
-          {sourceLanguage}
+          <Stack gap={2}>
+            <LanguageSelector
+              type={SectionType.Source}
+              value={sourceLanguage}
+              onChange={setSourceLanguage}
+            />
+            <TextArea
+              type={SectionType.Source}
+              value={sourceText}
+              onChange={setSourceText}
+            />
+          </Stack>
         </Col>
 
-        <Col>
+        <Col xs='auto'>
           <Button variant='link' disabled={sourceLanguage === AUTO_LANGUAGE} onClick={interchangeLanguages}>
             <ArrowsIcon />
           </Button>
         </Col>
 
         <Col>
-          <LanguageSelector
-            type='target'
-            value={targetLanguage}
-            onChange={setTargetLanguage}
-          />
-          {targetLanguage}
+          <Stack gap={2}>
+            <LanguageSelector
+              type={SectionType.Target}
+              value={targetLanguage}
+              onChange={setTargetLanguage}
+            />
+            <TextArea
+              loading={loading}
+              type={SectionType.Target}
+              value={translatedText}
+              onChange={setTranslatedText}
+            />
+          </Stack>
         </Col>
       </Row>
     </Container>

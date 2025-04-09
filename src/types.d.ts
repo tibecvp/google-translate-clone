@@ -18,3 +18,8 @@ export type Action =
     | { type: 'SET_TARGET_LANGUAGE', payload: Language }
     | { type: 'SET_SOURCE_TEXT', payload: string }
     | { type: 'SET_TRANSLATED_TEXT', payload: string }
+
+    export enum SectionType {
+        Source = 'source',
+        Target = 'target'
+    }
