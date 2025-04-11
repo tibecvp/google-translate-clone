@@ -9,6 +9,8 @@ import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE } from './constants'
 import { SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
+import { useEffect } from 'react'
+import { translate } from './services/translate'
 
 function App() {
   const {
@@ -23,6 +25,20 @@ function App() {
     setSourceText,
     setTranslatedText
   } = useStore()
+
+  useEffect(() => {
+    if (sourceText === '') return
+
+    translate({ sourceLanguage, targetLanguage, sourceText: sourceText })
+      .then(result => {
+        if (result == null) return
+        setTranslatedText(result)
+      })
+      .catch(() => {
+        setTranslatedText('Error')
+      })
+  }, [sourceText, sourceLanguage, targetLanguage])
+
   return (
     <Container fluid>
       <h2>Google Tanslate by Tibecvp</h2>
