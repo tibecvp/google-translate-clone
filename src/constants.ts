@@ -3,6 +3,11 @@ export const SUPPORTED_LANGUAGES = {
     es: 'Spanish',
     fr: 'French',
     pt: 'Portugese',
+    it: 'Italian',
+    uk: 'Ukranian',
+    ru: 'Russian',
+    ja: 'Japanese',
+    zh: 'Chinese',
     de: 'Deutsch'
 }
 

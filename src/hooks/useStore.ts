@@ -22,23 +22,36 @@ const initialState: State = {
     }
   
     if (type === 'SET_SOURCE_LANGUAGE') {
+      if (state.sourceLanguage === action.payload) return state
+
+      const loading = state.sourceText !== ''
+      
       return {
         ...state,
-        sourceLanguage: action.payload
+        sourceLanguage: action.payload,
+        traslatedText: '',
+        loading
       }
     }
   
     if (type === 'SET_TARGET_LANGUAGE') {
+      if (state.targetLanguage === action.payload) return state
+
+      const loading = state.sourceText !== ''
+
       return {
         ...state,
-        targetLanguage: action.payload
+        targetLanguage: action.payload,
+        translatedText: '',
+        loading
       }
     }
   
     if (type === 'SET_SOURCE_TEXT') {
+      const loading = action.payload !== ''
       return {
         ...state,
-        loading: true,
+        loading,
         sourceText: action.payload,
         translatedText: ''
       }
