@@ -41,7 +41,7 @@ function App() {
 
   return (
     <Container fluid>
-      <h2>Google Tanslate by Tibecvp</h2>
+      <h2>Tanslator by Tibecvp</h2>
 
       <Row>
         <Col>

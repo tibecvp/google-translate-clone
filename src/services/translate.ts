@@ -1,12 +1,11 @@
-// import { Configuration, OpenAIApi } from 'openai'
-import OpenAI from 'openai'
+import { GoogleGenAI } from '@google/genai'
 import { SUPPORTED_LANGUAGES } from '../constants'
 import { Language, SourceLanguage } from '../types.d'
 
 // This should go in an API, this exercise is focused on REACT and TypeScript
-const apiKey = import.meta.env.VITE_OPENAI_API_KEY
+const myKey = import.meta.env.VITE_GEMINI_API_KEY
 
-const openai = new OpenAI({ apiKey })
+const ai = new GoogleGenAI({ apiKey: `${myKey}` })
 
 export async function translate ({
     sourceLanguage,
@@ -19,50 +18,16 @@ export async function translate ({
 }) {
     if (sourceLanguage === targetLanguage) return sourceText
 
-    const messages = [
-        {
-            role: 'system',
-            content: 'You are an AI who tranlates text. You receive a text from user. Do not answer, just tranlate the text. The original language is surrounded by `{{` and `}}`. You can also receive {{auto}} which means that you have to detect the language. The language you translate to is surrounded by `[[`and `]]`.'
-        },
-        {
-            role: 'user',
-            content: `Hola mundo {{Spanish}} [[English]]`
-        },
-        {
-            role: 'assistant',
-            content: 'Hello World'
-        },
-        {
-            role: 'user',
-            content: 'How are you? {{auto}} [[Deutsch]]'
-        },
-        {
-            role: 'assistant',
-            content: 'Wie geht es dir?'
-        },
-        {
-            role: 'user',
-            content: 'Bon dia, com estas? {{auto}} [[Spanish]]'
-        },
-        {
-            role: 'assistant',
-            content: 'Buenos días, ¿cómo estás?'
-        }
-    ]
-
     const sourceCode = sourceLanguage === 'auto' ? 'auto' : SUPPORTED_LANGUAGES[sourceLanguage]
     const targetCode = SUPPORTED_LANGUAGES[targetLanguage]
 
-    const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [
-            ...messages,
-            {
-                role: 'user',
-                content: `${sourceText} {{${sourceCode}}} [[${targetCode}]]`
-            }
-        ]
+    const completion = await ai.models.generateContent({
+        model: 'gemini-2.0-flash',
+        contents: `Translate this: ${sourceText} {{${sourceCode}}} [[${targetCode}]]`,
+        config: {
+            systemInstruction: 'You are an AI who translates text. You receive a text from the user. Do not answer, just translate the text. The original language is surrounded by `{{` and `}}`. You can also receive {{auto}} which means that you have to detect the language. The language you translate to is surrounded by `[[`and `]]`. Please give your answer in plain text without surrounding it with any characters.'
+        }
     })
 
-    return completion.choices[0]?.message?.content
+    return completion.text
 }
