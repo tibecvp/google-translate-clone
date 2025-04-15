@@ -3,3 +3,14 @@
   margin: 0 auto;
   padding: 2rem;
 }
+
+h2 {
+  margin-bottom: 24px;
+}
+
+.disclaimer {
+  position: absolute;
+  bottom: 0;
+  right: 24px;
+  color: #d4d4d4;
+}

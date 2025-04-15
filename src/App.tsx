@@ -41,7 +41,7 @@ function App() {
 
   return (
     <Container fluid>
-      <h2>Tanslator by Tibecvp</h2>
+      <h2>Tibecvp Tanslator</h2>
 
       <Row>
         <Col>
@@ -81,6 +81,8 @@ function App() {
           </Stack>
         </Col>
       </Row>
+
+      <p className='disclaimer'>Google Translate clone for learning purposes.</p>
     </Container>
   )
 }
