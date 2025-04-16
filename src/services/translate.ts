@@ -23,9 +23,9 @@ export async function translate ({
 
     const completion = await ai.models.generateContent({
         model: 'gemini-2.0-flash',
-        contents: `Translate this: ${sourceText} {{${sourceCode}}} [[${targetCode}]]`,
+        contents: `${sourceText} {{${sourceCode}}} [[${targetCode}]]`,
         config: {
-            systemInstruction: 'You are an AI who translates text. You receive a text from the user. Do not answer, just translate the text. The original language is surrounded by `{{` and `}}`. You can also receive {{auto}} which means that you have to detect the language. The language you translate to is surrounded by `[[`and `]]`. Please give your answer in plain text without surrounding it with any characters.'
+            systemInstruction: 'You are an AI who translates text. You receive a text from the user. Do not answer, just translate the text. The original language is surrounded by `{{` and `}}`. You can also receive {{auto}} which means that you have to detect the language. The language you translate to is surrounded by `[[`and `]]`. The text may have break lines, keep it in mind. Please give your answer in plain text without surrounding it with any characters.'
         }
     })
 

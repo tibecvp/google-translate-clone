@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
+import { useDebounce } from './hooks/useDebounce'
 
 import './App.css'
 import { ArrowsIcon } from './components/icons'
@@ -26,10 +27,13 @@ function App() {
     setTranslatedText
   } = useStore()
 
-  useEffect(() => {
-    if (sourceText === '') return
 
-    translate({ sourceLanguage, targetLanguage, sourceText: sourceText })
+  const debouncedSourceText = useDebounce(sourceText)
+
+  useEffect(() => {
+    if (debouncedSourceText === '') return
+
+    translate({ sourceLanguage, targetLanguage, sourceText: debouncedSourceText })
       .then(result => {
         if (result == null) return
         setTranslatedText(result)
@@ -37,7 +41,7 @@ function App() {
       .catch(() => {
         setTranslatedText('Error')
       })
-  }, [sourceText, sourceLanguage, targetLanguage])
+  }, [debouncedSourceText, sourceLanguage, targetLanguage])
 
   return (
     <Container fluid>
