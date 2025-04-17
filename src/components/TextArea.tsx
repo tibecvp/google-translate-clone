@@ -18,7 +18,7 @@ const getPlaceholder = ({ type, loading }: { type: SectionType, loading?: boolea
 
 export const TextArea = ({ type, loading, value, onChange }: Props) => {
     const styles = type === SectionType.Source
-        ? commonStyles
+        ? { ...commonStyles, paddingRight: 30 }
         : { ...commonStyles, backgroundColor: '#f5f5f5' }
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

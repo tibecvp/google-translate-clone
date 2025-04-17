@@ -4,7 +4,7 @@ import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
 import { useDebounce } from './hooks/useDebounce'
 
 import './App.css'
-import { ArrowsIcon, ClipboardIcon, SpeakerIcon } from './components/icons'
+import { ArrowsIcon, ClearIcon, ClipboardIcon, SpeakerIcon } from './components/icons'
 import { LanguageSelector } from './components/LanguageSelector'
 import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE, VOICE_FOR_LANGUAGE } from './constants'
@@ -43,6 +43,10 @@ function App() {
       })
   }, [debouncedSourceText, sourceLanguage, targetLanguage])
 
+  const handleClearText = () => {
+    setSourceText('')
+  }
+
   const handleClipboard = () => {
     navigator.clipboard.writeText(translatedText)
   }
@@ -79,10 +83,23 @@ function App() {
                 variant='link'
                 style={{
                   position: 'absolute',
+                  right: -4,
+                  top: 0,
+                  opacity: 0.6,
+                  display: (sourceText === '') ? 'none' : 'block'
+                }}
+                onClick={handleClearText}
+              >
+                <ClearIcon />
+              </Button>
+              <Button
+                variant='link'
+                style={{
+                  position: 'absolute',
                   left: 0,
                   bottom: 0,
-                  opacity: 0.7,
-                  display: (translatedText === '') ? 'none' : 'block'
+                  opacity: 0.6,
+                  display: (sourceText === '') ? 'none' : 'block'
                 }}
                 onClick={() => handleSpeak(SectionType.Source)}
               >
@@ -118,13 +135,13 @@ function App() {
               >
                 <Button
                   variant='link'
-                  style={{ opacity: 0.7, display: (translatedText === '') ? 'none' : 'block' }}
+                  style={{ opacity: 0.6, display: (translatedText === '') ? 'none' : 'block' }}
                   onClick={handleClipboard}>
                   <ClipboardIcon />
                 </Button>
                 <Button
                   variant='link'
-                  style={{ opacity: 0.7, display: (translatedText === '') ? 'none' : 'block' }}
+                  style={{ opacity: 0.6, display: (translatedText === '') ? 'none' : 'block' }}
                   onClick={() => handleSpeak(SectionType.Target)}
                 >
                   <SpeakerIcon />
