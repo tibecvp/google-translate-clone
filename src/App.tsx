@@ -8,7 +8,7 @@ import { ArrowsIcon, ClipboardIcon, SpeakerIcon } from './components/icons'
 import { LanguageSelector } from './components/LanguageSelector'
 import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE, VOICE_FOR_LANGUAGE } from './constants'
-import { SectionType } from './types.d'
+import { Language, SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
 import { useEffect } from 'react'
 import { translate } from './services/translate'
@@ -47,9 +47,13 @@ function App() {
     navigator.clipboard.writeText(translatedText)
   }
 
-  const handleSpeak = () => {
-    const utterance = new SpeechSynthesisUtterance(translatedText)
-    utterance.lang = VOICE_FOR_LANGUAGE[targetLanguage]
+  const handleSpeak = (source: SectionType) => {
+    const defaultLanguage = sourceLanguage === 'auto' ? 'en' : sourceLanguage
+    const language = source === SectionType.Source ? defaultLanguage : targetLanguage
+    const textToRead = source === SectionType.Source ? sourceText : translatedText
+
+    const utterance = new SpeechSynthesisUtterance(textToRead)
+    utterance.lang = VOICE_FOR_LANGUAGE[language]
     speechSynthesis.speak(utterance)
   }
 
@@ -65,11 +69,27 @@ function App() {
               value={sourceLanguage}
               onChange={setSourceLanguage}
             />
-            <TextArea
-              type={SectionType.Source}
-              value={sourceText}
-              onChange={setSourceText}
-            />
+            <div style={{ position: 'relative' }}>
+              <TextArea
+                type={SectionType.Source}
+                value={sourceText}
+                onChange={setSourceText}
+              />
+              <Button
+                variant='link'
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  bottom: 0,
+                  opacity: 0.7,
+                  display: (translatedText === '') ? 'none' : 'block'
+                }}
+                onClick={() => handleSpeak(SectionType.Source)}
+              >
+                <SpeakerIcon />
+              </Button>
+
+            </div>
           </Stack>
         </Col>
 
@@ -98,12 +118,14 @@ function App() {
               >
                 <Button
                   variant='link'
+                  style={{ opacity: 0.7, display: (translatedText === '') ? 'none' : 'block' }}
                   onClick={handleClipboard}>
                   <ClipboardIcon />
                 </Button>
                 <Button
                   variant='link'
-                  onClick={handleSpeak}
+                  style={{ opacity: 0.7, display: (translatedText === '') ? 'none' : 'block' }}
+                  onClick={() => handleSpeak(SectionType.Target)}
                 >
                   <SpeakerIcon />
                 </Button>

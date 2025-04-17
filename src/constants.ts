@@ -12,14 +12,14 @@ export const SUPPORTED_LANGUAGES = {
 }
 
 export const VOICE_FOR_LANGUAGE = {
-    en: 'en-US',
-    es: 'es-CO',
+    en: 'en-CA',
+    es: 'es-ES',
     fr: 'fr-CA',
     pt: 'pt-BR',
     it: 'it',
     uk: 'uk',
     ru: 'ru',
-    ja: 'ja-JP',
+    ja: 'ja',
     zh: 'zh',
     de: 'de-DE'
 }
