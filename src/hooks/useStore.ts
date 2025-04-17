@@ -14,8 +14,13 @@ const initialState: State = {
   
     if (type === 'INTERCHANGE_LANGUAGES') {
       if (state.sourceLanguage === 'auto') return state
+
+      const loading = state.sourceText !== ''
+
       return {
         ...state,
+        loading,
+        result: '',
         sourceLanguage: state.targetLanguage,
         targetLanguage: state.sourceLanguage,
       }
