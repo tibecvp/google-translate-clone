@@ -8,7 +8,7 @@ import { ArrowsIcon, ClearIcon, ClipboardIcon, SpeakerIcon } from './components/
 import { LanguageSelector } from './components/LanguageSelector'
 import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE, VOICE_FOR_LANGUAGE } from './constants'
-import { Language, SectionType } from './types.d'
+import { SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
 import { useEffect } from 'react'
 import { translate } from './services/translate'
@@ -62,7 +62,7 @@ function App() {
   }
 
   return (
-    <Container fluid>
+    <Container fluid style={{ width: '100%' }}>
       <h2>Tibecvp Tanslator</h2>
 
       <Row>
