@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { Action, Language, SourceLanguage, type State } from '../types.d'
+import { Action, Language, SourceLanguage, type State } from '../types'
 
 const initialState: State = {
     sourceLanguage: 'auto',
