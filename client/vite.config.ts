@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'http://localhost:3001',
+      '/api': JSON.stringify(process.env.VITE_TRANSLATE_API_URL)
     }
   },
   test: {

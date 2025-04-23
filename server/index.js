@@ -8,7 +8,7 @@ dotenv.config()
 const app = express()
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Replace with your frontend's exact origin
+    origin: process.env.FRONTEND_URL, // Replace with your frontend's exact origin
     methods: 'POST, OPTIONS', // Specify allowed methods for your route
     allowedHeaders: 'Content-Type', // Specify allowed headers
 }

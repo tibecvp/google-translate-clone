@@ -15,7 +15,9 @@ export async function translate ({
     const sourceCode = sourceLanguage === 'auto' ? 'auto' : SUPPORTED_LANGUAGES[sourceLanguage]
     const targetCode = SUPPORTED_LANGUAGES[targetLanguage]
 
-    const response = await fetch('http://localhost:3001/api/translate', {
+    const API_URL = `${import.meta.env.VITE_TRANSLATE_API_URL}/api/translate`
+
+    const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({sourceText: sourceText, sourceLanguage: sourceCode, targetLanguage: targetCode})
