@@ -12,6 +12,7 @@ const corsOptions = {
     methods: 'POST, OPTIONS', // Specify allowed methods for your route
     allowedHeaders: 'Content-Type', // Specify allowed headers
 }
+console.log('CORS options:', corsOptions)
 
 app.use(cors(corsOptions))
 app.use(express.json())
