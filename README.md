@@ -9,6 +9,7 @@ Tibecvp Translator is a Google Translate clone built with React, TypeScript, and
 - **Responsive Design**: Optimized for various screen sizes.
 - **ESLint Integration**: Ensures code quality and consistency.
 - **Environment Configuration**: `.env` files for managing API keys and other environment variables.
+- **Backend Integration**: A Node.js/Express backend for handling API requests.
 
 ## Getting Started
 
@@ -25,40 +26,69 @@ Ensure you have the following installed:
 
    ```bash
    git clone <repository-url>
-   cd google-translate-clone/client
+   cd google-translate-clone
    ```
 
-2. Install dependencies:
+2. Install dependencies for both the frontend and backend:
 
    ```bash
+   # Frontend
+   cd client
+   npm install
+
+   # Backend
+   cd ../server
    npm install
    ```
 
 ### Running the Development Server
 
-Start the development server:
+Start both the frontend and backend development servers:
 
-```bash
-npm run dev
-```
+1. Start the backend server:
 
-Open your browser and navigate to `http://localhost:3000` to view the application.
+   ```bash
+   cd server
+   npm run dev
+   ```
+
+   The backend server will run on `http://localhost:5000` (or as configured in the `.env` file).
+
+2. Start the frontend server:
+
+   ```bash
+   cd client
+   npm run dev
+   ```
+
+   Open your browser and navigate to `http://localhost:3000` to view the application.
 
 ### Building for Production
 
 To build the project for production:
 
-```bash
-npm run build
-```
+1. Build the frontend:
 
-The production-ready files will be in the `dist` directory.
+   ```bash
+   cd client
+   npm run build
+   ```
+
+   The production-ready files will be in the `dist` directory.
+
+2. Deploy the backend as needed (e.g., to a cloud provider or hosting service).
 
 ### Linting
 
 Run ESLint to check for code quality:
 
 ```bash
+# Frontend
+cd client
+npm run lint
+
+# Backend
+cd ../server
 npm run lint
 ```
 
@@ -67,22 +97,48 @@ npm run lint
 ```
 google-translate-clone/
 ├── client/
-│   ├── src/               # Source code
+│   ├── src/               # Frontend source code
 │   ├── public/            # Static assets
-│   ├── .env.example       # Example environment variables
-│   ├── package.json       # Project dependencies and scripts
+│   ├── .env.example       # Example environment variables for the frontend
+│   ├── package.json       # Frontend dependencies and scripts
 │   ├── vite.config.ts     # Vite configuration
-│   └── ...                # Other configuration files
-├── server/                # Backend server (if applicable)
+│   └── ...                # Other frontend configuration files
+├── server/
+│   ├── src/               # Backend source code
+│   ├── .env.example       # Example environment variables for the backend
+│   ├── package.json       # Backend dependencies and scripts
+│   ├── server.js          # Entry point for the backend
+│   └── ...                # Other backend configuration files
 └── README.md              # Project documentation
 ```
 
 ## Environment Variables
 
-The project uses environment variables for configuration. Copy the `.env.example` file to `.env` and update the values as needed.
+The project uses `.env` files for configuration. Both the frontend and backend have their own `.env.example` files.
+
+### Frontend `.env.example`
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+Copy this file to `.env` in the `client` directory and update the values as needed:
 
 ```bash
-cp .env.example .env
+cp client/.env.example client/.env
+```
+
+### Backend `.env.example`
+
+```env
+PORT=5000
+API_KEY=<your-api-key>
+```
+
+Copy this file to `.env` in the `server` directory and update the values as needed:
+
+```bash
+cp server/.env.example server/.env
 ```
 
 ## License
