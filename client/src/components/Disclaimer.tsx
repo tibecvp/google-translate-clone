@@ -7,7 +7,7 @@ export const Disclaimer = () => {
           <strong>🅸 Disclaimer: This is a learning project and portfolio piece.</strong>
         </p>
         <ul style="margin-bottom: 0; padding-left: 20px;">
-          <li>The performance and availability of this application may vary, especially as it is hosted on a free tier service (Render). You might experience delays, particularly after periods of inactivity for your first request.</li>
+          <li>The performance and availability of this application may vary, especially as it is hosted on a free tier service (Render). You might experience delays, particularly for your frst request after periods of inactivity.</li>
           <li>This application was created for educational purposes and to showcase development skills.</li>
           <li>It utilizes the Gemini API for translation services.</li>
           <li>The data processed by this application is not stored or used beyond the scope of providing the translation.</li>
