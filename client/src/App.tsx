@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
 import { useDebounce } from './hooks/useDebounce'
 
 import './App.css'
+import logo from './assets/logo.svg'
 import { ArrowsIcon, ClearIcon, ClipboardIcon, SpeakerIcon } from './components/icons'
 import { LanguageSelector } from './components/LanguageSelector'
 import { useStore } from './hooks/useStore'
@@ -12,6 +13,7 @@ import { SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
 import { useEffect } from 'react'
 import { translate } from './services/translate'
+import { Disclaimer } from './components/Disclaimer'
 
 function App() {
   const {
@@ -63,7 +65,14 @@ function App() {
 
   return (
     <Container fluid style={{ width: '100%' }}>
-      <h2>Tibecvp Tanslator</h2>
+      <div className='header' style={{ display: 'flex', alignItems: 'center', padding: '1rem 0' }}>
+        <img
+          src={logo}
+          alt='logo'
+          style={{ width: '4rem', height: '4rem', marginRight: '0.5rem' }}
+        />
+        <h1>Translator by Tibecvp</h1>
+      </div>
 
       <Row>
         <Col>
@@ -152,7 +161,8 @@ function App() {
         </Col>
       </Row>
 
-      <p className='disclaimer'>Google Translate clone for learning purposes.</p>
+      <Disclaimer />
+
     </Container>
   )
 }

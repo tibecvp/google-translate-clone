@@ -9,8 +9,9 @@ h2 {
 }
 
 .disclaimer {
-  position: absolute;
+  font-size: 0.9rem;
+  margin-top: 36px;
   bottom: 0;
   right: 24px;
-  color: #d4d4d4;
+  color: #b0b0b0;
 }
