@@ -1,5 +1,6 @@
 import { Form } from 'react-bootstrap'
 import { SectionType } from '../types.d'
+import { useEffect, useRef } from 'react'
 
 interface Props {
     type: SectionType
@@ -8,7 +9,7 @@ interface Props {
     value: string
 }
 
-const commonStyles = { border: '2px #f5f5f5 solid', height: '200px' }
+const commonStyles = { border: '2px #f5f5f5 solid', minHeight: '200px', paddingBottom: 32 }
 
 const getPlaceholder = ({ type, loading }: { type: SectionType, loading?: boolean }) => {
     if (type === SectionType.Source) return 'Enter text'
@@ -17,6 +18,8 @@ const getPlaceholder = ({ type, loading }: { type: SectionType, loading?: boolea
 }
 
 export const TextArea = ({ type, loading, value, onChange }: Props) => {
+    const textareaRef = useRef<HTMLTextAreaElement>(null)
+
     const styles = type === SectionType.Source
         ? { ...commonStyles, paddingRight: 30 }
         : { ...commonStyles, backgroundColor: '#f5f5f5' }
@@ -25,14 +28,22 @@ export const TextArea = ({ type, loading, value, onChange }: Props) => {
         onChange(event.target.value)
     }
 
+    useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto'
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+        }
+    }, [value])
+
     return (
         <Form.Control
+            ref={textareaRef}
             autoFocus={type === SectionType.Source}
             as='textarea'
             name={`${type}-textarea`}
             disabled={type === SectionType.Target}
             placeholder={getPlaceholder({ type, loading })}
-            style={{ ...styles, resize: 'none' }}
+            style={{ ...styles, resize: 'none', overflow: 'hidden' }}
             value={value}
             onChange={handleChange}
         />
