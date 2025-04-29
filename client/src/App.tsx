@@ -64,17 +64,47 @@ function App() {
   }
 
   return (
-    <Container fluid style={{ width: '100%' }}>
+    <Container fluid >
       <Header />
 
-      <Row>
-        <Col>
-          <Stack gap={2}>
+      <Stack gap={2}>
+        <Row>
+          <Col>
             <LanguageSelector
               type={SectionType.Source}
               value={sourceLanguage}
               onChange={setSourceLanguage}
             />
+          </Col>
+
+          <Col
+            xs='auto'
+            style={{ padding: 0 }}
+          >
+            <Button
+              variant='link'
+              disabled={sourceLanguage === AUTO_LANGUAGE}
+              onClick={interchangeLanguages}
+              style={{
+                margin: 0,
+                padding: 0
+              }}
+            >
+              <ArrowsIcon />
+            </Button>
+          </Col>
+
+          <Col>
+            <LanguageSelector
+              type={SectionType.Target}
+              value={targetLanguage}
+              onChange={setTargetLanguage}
+            />
+          </Col>
+        </Row>
+
+        <Row xs={1} md={2}>
+          <Col style={{ marginBottom: 4 }}>
             <div style={{ position: 'relative' }}>
               <TextArea
                 type={SectionType.Source}
@@ -107,24 +137,9 @@ function App() {
               >
                 <SpeakerIcon />
               </Button>
-
             </div>
-          </Stack>
-        </Col>
-
-        <Col xs='auto'>
-          <Button variant='link' disabled={sourceLanguage === AUTO_LANGUAGE} onClick={interchangeLanguages}>
-            <ArrowsIcon />
-          </Button>
-        </Col>
-
-        <Col>
-          <Stack gap={2}>
-            <LanguageSelector
-              type={SectionType.Target}
-              value={targetLanguage}
-              onChange={setTargetLanguage}
-            />
+          </Col>
+          <Col>
             <div style={{ position: 'relative' }}>
               <TextArea
                 loading={loading}
@@ -150,9 +165,9 @@ function App() {
                 </Button>
               </div>
             </div>
-          </Stack>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Stack>
 
       <Disclaimer />
 
