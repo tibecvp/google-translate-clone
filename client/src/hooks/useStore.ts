@@ -23,6 +23,7 @@ const initialState: State = {
         result: '',
         sourceLanguage: state.targetLanguage,
         targetLanguage: state.sourceLanguage,
+        sourceText: state.translatedText,
       }
     }
   

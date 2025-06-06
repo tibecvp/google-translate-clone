@@ -10,7 +10,7 @@ import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE, VOICE_FOR_LANGUAGE } from './constants'
 import { SectionType } from './types.d'
 import { TextArea } from './components/TextArea'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { translate } from './services/translate'
 import { Disclaimer } from './components/Disclaimer'
 import { Header } from './components/Header'
@@ -29,6 +29,7 @@ function App() {
     setTranslatedText
   } = useStore()
 
+  const sourceTextAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const debouncedSourceText = useDebounce(sourceText)
 
@@ -47,6 +48,8 @@ function App() {
 
   const handleClearText = () => {
     setSourceText('')
+    // Set focus back to the source text area
+    sourceTextAreaRef.current?.focus()
   }
 
   const handleClipboard = () => {
@@ -107,6 +110,7 @@ function App() {
           <Col style={{ marginBottom: 4 }}>
             <div style={{ position: 'relative' }}>
               <TextArea
+                ref={sourceTextAreaRef}
                 type={SectionType.Source}
                 value={sourceText}
                 onChange={setSourceText}
@@ -142,6 +146,7 @@ function App() {
           <Col>
             <div style={{ position: 'relative' }}>
               <TextArea
+                ref={null}
                 loading={loading}
                 type={SectionType.Target}
                 value={translatedText}

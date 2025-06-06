@@ -7,6 +7,7 @@ interface Props {
     loading?: boolean
     onChange: (value: string) => void
     value: string
+    ref: React.Ref<HTMLTextAreaElement>
 }
 
 const commonStyles = { border: '2px #f5f5f5 solid', minHeight: '200px', paddingBottom: 32 }
@@ -17,7 +18,7 @@ const getPlaceholder = ({ type, loading }: { type: SectionType, loading?: boolea
     return 'Translation'
 }
 
-export const TextArea = ({ type, loading, value, onChange }: Props) => {
+export const TextArea = ({ type, loading, value, onChange, ref }: Props) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     const styles = type === SectionType.Source
@@ -37,7 +38,7 @@ export const TextArea = ({ type, loading, value, onChange }: Props) => {
 
     return (
         <Form.Control
-            ref={textareaRef}
+            ref={ref || textareaRef}
             autoFocus={type === SectionType.Source}
             as='textarea'
             name={`${type}-textarea`}
